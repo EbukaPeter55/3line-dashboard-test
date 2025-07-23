@@ -1,6 +1,6 @@
 import type { LucideIcon } from "lucide-react";
 
-export type ImagePair = { default: { src: string }; active: { src: string } };
+export type ImagePair = { default: string; active: string };
 
 export type NavDivider = { type: "divider" };
 
@@ -10,6 +10,7 @@ export type NavLink = {
   image?: ImagePair;
   icon?: LucideIcon;
   action?: "logout";
+  count?: number;
 };
 
 export type NavDropdown = {

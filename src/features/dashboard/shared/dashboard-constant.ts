@@ -1,6 +1,9 @@
-import { Settings, LogOut } from "lucide-react";
-import dashboardIcon from "../../../assets/dashboard/dashboard.png";
-import dashboardActiveIcon from "../../../assets/dashboard/dashboard-active.png";
+import { Settings, Home, BarChart } from "lucide-react";
+import projectIcon from "../../../assets/dashboard/projects.png";
+import taskIcon from "../../../assets/dashboard/task.png";
+import reportingIcon from "../../../assets/dashboard/reporting.png";
+import userIcon from "../../../assets/dashboard/users.png";
+import supportIcon from "../../../assets/dashboard/support.png";
 import {
   Country,
   FullDashboardData,
@@ -11,30 +14,43 @@ import {
 export const navItems: NavItem[] = [
   {
     href: "/dashboard",
-    label: "Dashboard",
-    image: { default: dashboardIcon, active: dashboardActiveIcon },
+    label: "Home",
+    icon: Home,
   },
+  {
+    href: "#",
+    label: "Dashboard",
+    icon: BarChart,
+  },
+  {
+    href: "#",
+    label: "Projects",
+    count: 10,
+    image: {default: projectIcon, active: projectIcon}
+  },
+  {
+    href: "#",
+    label: "Tasks",
+    image: {default: taskIcon, active: taskIcon}
+  },
+  {
+    href: "#",
+    label: "Reporting",
+    image: {default: reportingIcon, active: reportingIcon}
+  },
+  {
+    href: "#",
+    label: "Users",
+    image: {default: userIcon, active: userIcon}
+  },
+  {
+    href: "#",
+    label: "Support",
+    image: {default: supportIcon, active: supportIcon}
+  },
+
   { href: "/dashboard/settings", label: "Settings", icon: Settings },
   { type: "divider" },
-  { href: "/auth/login", label: "Logout", action: "logout", icon: LogOut }, // Direct to login page on logout
-];
-
-export const COUNTRIES: Country[] = [
-  {
-    label: "US",
-    value: "us",
-    flag: "/assets/us-flag.png", // Paths relative to your `public` (or root `dist` in React)
-  },
-  {
-    label: "Nigeria",
-    value: "ng",
-    flag: "/assets/nigeria-flag.png",
-  },
-  {
-    label: "French",
-    value: "fr",
-    flag: "/assets/uk-flag.png",
-  },
 ];
 
 export const MOCK_FULL_DASHBOARD_DATA: FullDashboardData = {
