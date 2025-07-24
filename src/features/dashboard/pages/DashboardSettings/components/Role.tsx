@@ -194,6 +194,20 @@ export default function RoleTabContent() {
                         Download all
                     </Button>
                 </div>
+                <div className="mt-4 max-w-[19.2rem] sm:max-w-full">
+                    <DataTable
+                        columns={roleColumns}
+                        data={sampleRoleTableData}
+                        pagination={true}
+                        hasTableTitle={false}
+                        showUpAndDownArrows={false}
+                        emptyTitle="No roles found"
+                        emptyDescription="Adjust filters or add new roles."
+                        enableRowSelection={true}
+                        onRowSelectionChange={handleTableRowSelectionChange}
+                        data-testid="mock-data-table"
+                    />
+                </div>
             </div>
         </>
     )
