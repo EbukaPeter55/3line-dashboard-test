@@ -1,31 +1,28 @@
-import { useState } from "react";
+import {Suspense, lazy} from "react";
 import "./App.css";
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import DashboardLayout from "./features/dashboard/DashboardLayout";
-import DashboardPage from "./features/dashboard/components/DashboardPage";
-import SettingsPage from "@/features/dashboard/pages/DashboardSettings";
+import {BrowserRouter, Route, Routes, Navigate} from "react-router-dom";
+
+const DashboardLayout = lazy(() => import("./features/dashboard/DashboardLayout"));
+const DashboardPage = lazy(() => import("./features/dashboard/components/DashboardPage"));
+const SettingsPage = lazy(() => import("@/features/dashboard/pages/DashboardSettings"));
 
 function App() {
-  const [count, setCount] = useState(0);
 
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/dashboard" element={<DashboardLayout />}>
-          {/* Nested routes for dashboard modules */}
-          <Route index element={<DashboardPage />} />{" "}
-          {/* /dashboard (default child route) */}
-          <Route path="settings" element={<SettingsPage />} />
-        </Route>
+    return (
+        <BrowserRouter>
+            <Suspense fallback={<div>Loading...</div>}>
+                <Routes>
+                    <Route path="/dashboard" element={<DashboardLayout/>}>
+                        <Route index element={<DashboardPage/>}/>
+                        <Route path="settings" element={<SettingsPage/>}/>
+                    </Route>
 
-        {/* Redirect from root to dashboard or login */}
-        <Route path="/" element={<Navigate to="/dashboard" />} />
-
-        {/* Fallback for any unmatched routes */}
-        <Route path="*" element={<div>404 Not Found</div>} />
-      </Routes>
-    </BrowserRouter>
-  );
+                    <Route path="/" element={<Navigate to="/dashboard/settings"/>}/>
+                    <Route path="*" element={<div>404 Not Found</div>}/>
+                </Routes>
+            </Suspense>
+        </BrowserRouter>
+    );
 }
 
 export default App;
