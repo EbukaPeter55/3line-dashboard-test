@@ -1,6 +1,6 @@
-# React + TypeScript + Vite
+# A simple Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a minimal dashboard built with modern tech stack as seen below:
 
 ## Development Environment
 
@@ -18,6 +18,10 @@ This project is built using:
 * **Table Management:** [React TanStack Table](https://tanstack.com/table/latest)
 * **Unit Testing:** [Jest](https://jestjs.io/)
 * **Component Testing:** [React Testing Library](https://testing-library.com/react/)
+* **Backend:** Node.js and Express
+
+ ## Important information:
+ While I built an API for User role using Node and Express, I didn't deploy it to render because of time constraint at my work place. So I made use of a mock data locally for user roles
 
 ## Getting Started
 
