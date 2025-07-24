@@ -9,6 +9,7 @@ import {DataTable} from "@/components/ui/table/table";
 import {roleColumns} from "@/components/ui/table/column";
 import {useState} from "react";
 import {RoleTableData} from "@/components/ui/table/table-types";
+import "../../../../../App.css";
 
 export default function RoleTabContent() {
     const [selectedRole, setSelectedRole] = useState<string>("superadmin");
@@ -27,7 +28,7 @@ export default function RoleTabContent() {
                     Update your roles details and information.
                 </p>
             </div>
-            <hr/>
+            <hr className="my-4"/>
 
             <div className="flex flex-col md:flex-row md:space-x-8">
                 <div className="space-y-2 text-left w-full md:w-1/4">
@@ -177,9 +178,8 @@ export default function RoleTabContent() {
                     </RadioGroup>
                 </div>
             </div>
-
             <div className="space-y-4 border-t border-gray-200 pt-6 mt-6">
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col sm:flex-row justify-between items-start gap-4">
                     <h3 className="text-xl font-semibold text-[#1A1A1A] dark:text-gray-100">User Roles</h3>
                     <Button variant="outline"
                             className="text-[#344054] dark:text-gray-200 border-gray-300 dark:border-gray-600 hover:bg-gray-50"
