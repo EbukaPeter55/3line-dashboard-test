@@ -20,7 +20,7 @@ export default function DashboardSettingsPage() {
         "My details",
         "Profile",
         "Password",
-        "Team",
+        "Roles",
     ];
     const [visibleTabs, setVisibleTabs] = useState(allTabs);
     useEffect(() => {
