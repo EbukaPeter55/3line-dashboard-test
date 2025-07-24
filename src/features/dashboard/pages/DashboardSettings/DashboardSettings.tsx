@@ -48,6 +48,32 @@ export default function DashboardSettingsPage() {
                 Manage your team and preferences here.
             </p>
             <CustomTabs defaultValue="roles" className="space-y-6">
+                <div className=" overflow-x-auto no-scrollbar w-full min-w-0">
+                    <CustomTabsList
+                        className="flex w-max justify-start bg-transparent p-0 h-auto rounded-none"
+                        data-testid="mock-tabs-list-small-screen"
+                    >
+                        {visibleTabs.map((tab, index, arr) => {
+                            const isFirst = index === 0;
+                            const isLast = index === arr.length - 1;
+
+                            return (
+                                <CustomTabTrigger
+                                    key={tab}
+                                    value={tab.toLowerCase().replace(/\s/g, '-')}
+                                    className={cn(
+                                        "rounded-none whitespace-nowrap px-4 py-2 text-sm font-semibold border-y border-r border-gray-200 text-[#667085] data-[state=active]:text-[#1A1A1A] data-[state=active]:border-blue-600 data-[state=active]:bg-white dark:text-gray-400 dark:data-[state=active]:text-white dark:data-[state=active]:border-blue-400",
+                                        isFirst && "border-l rounded-l-md",
+                                        isLast && "rounded-r-md"
+                                    )}
+                                    data-testid={`mock-tab-trigger-${tab.toLowerCase().replace(/\s/g, '-')}`}
+                                >
+                                    {tab}
+                                </CustomTabTrigger>
+                            );
+                        })}
+                    </CustomTabsList>
+                </div>
 
                 {/* Tab Contents */}
                 <CustomTabContent value="my-details">
