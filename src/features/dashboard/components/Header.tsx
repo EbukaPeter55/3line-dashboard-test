@@ -7,11 +7,6 @@ interface HeaderProps {
 }
 
 export default function Header({ onMenuClick }: HeaderProps) {
-  const dropdownRef = useRef<HTMLDivElement>(null);
-
-  const toggleNotifications = () => {
-    setIsNotificationsOpen((prev) => !prev);
-  };
 
   return (
     <header

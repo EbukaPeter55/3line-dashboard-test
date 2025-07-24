@@ -2,8 +2,8 @@
 
 import {ColumnDef} from '@tanstack/react-table';
 import {Badge} from '../badge';
-import {RoleTableData, UserAvatar} from "@/app/dashboard/shared/dashboard-types";
 import {ArrowUpDown} from 'lucide-react';
+import {RoleTableData, UserAvatar} from "@/components/ui/table/table-types";
 
 const statusCell =
     <T extends { status: string }>() =>
