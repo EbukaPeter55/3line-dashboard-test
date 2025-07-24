@@ -34,7 +34,7 @@ interface DataTableProps<TData, TValue> {
     showUpAndDownArrows?: boolean;
     emptyDescription?: string;
     onRowClick?: (row: TData) => void;
-    enableRowSelection?: boolean; // New prop to optionally disable row selection
+    enableRowSelection?: boolean;
     onRowSelectionChange?: (selectedRows: TData[]) => void;
 }
 
@@ -53,8 +53,6 @@ export function DataTable<TData extends object, TValue>({
     const [sorting, setSorting] = useState<SortingState>([]);
     const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 
-    // Memoize columns to prevent unnecessary re-renders when data changes,
-    // and to prepend the selection column only once.
     const allColumns = useMemo(() => {
         if (!enableRowSelection) {
             return columns;
@@ -112,13 +110,9 @@ export function DataTable<TData extends object, TValue>({
         }
     }, [rowSelection, table, onRowSelectionChange]);
 
-
     return (
-        <div
-            className="border rounded-xl overflow-hidden bg-white dark:bg-gray-800 dark:border-gray-700">
-            {/* Header */}
-            <div
-                className="flex flex-wrap gap-2 items-center justify-between px-4 py-3 border-b bg-muted/20 dark:bg-gray-700 dark:border-gray-600">
+        <div className="border rounded-xl overflow-hidden bg-white">
+            <div className="flex flex-wrap gap-2 items-center justify-between px-4 py-3 border-b bg-muted/20 dark:bg-gray-700 dark:border-gray-600">
                 {hasTableTitle ? (
                     <h4 className="text-[1rem] font-semibold text-[var(--primary-text)] dark:text-gray-100">
                         {tableTitle}
@@ -132,50 +126,51 @@ export function DataTable<TData extends object, TValue>({
                 )}
             </div>
 
-            {/* Table / Empty state */}
             {data.length ? (
-                <table className="w-full text-sm">
-                    <thead className="bg-muted/40 dark:bg-gray-700">
-                    {table.getHeaderGroups().map((hg) => (
-                        <tr key={hg.id} className="border-b dark:border-gray-600">
-                            {hg.headers.map((header) => (
-                                <th key={header.id}
-                                    className="px-4 py-3 text-left font-medium text-muted-foreground dark:text-gray-300">
-                                    {header.isPlaceholder ? null : (
-                                        <div
-                                            className={cn(
-                                                'flex items-center gap-1',
-                                                header.column.getCanSort() && 'cursor-pointer select-none',
-                                            )}
-                                            onClick={header.column.getCanSort() ? header.column.getToggleSortingHandler() : undefined}
-                                        >
-                                            {flexRender(header.column.columnDef.header, header.getContext())}
-                                            {header.column.getCanSort() && showUpAndDownArrows && (
-                                                <ArrowUpDown
-                                                    className="w-4 h-4 text-muted-foreground dark:text-gray-400"/>
-                                            )}
-                                        </div>
-                                    )}
-                                </th>
-                            ))}
-                        </tr>
-                    ))}
-                    </thead>
+                <div className="w-full overflow-x-auto sm:overflow-visible">
+                    <table className="w-full min-w-[700px] text-sm">
+                        <thead className="bg-muted/40 dark:bg-gray-700">
+                        {table.getHeaderGroups().map((hg) => (
+                            <tr key={hg.id} className="border-b dark:border-gray-600">
+                                {hg.headers.map((header) => (
+                                    <th key={header.id}
+                                        className="px-4 py-3 text-left font-medium text-muted-foreground dark:text-gray-300 whitespace-nowrap">
+                                        {header.isPlaceholder ? null : (
+                                            <div
+                                                className={cn(
+                                                    'flex items-center gap-1',
+                                                    header.column.getCanSort() && 'cursor-pointer select-none',
+                                                )}
+                                                onClick={header.column.getCanSort() ? header.column.getToggleSortingHandler() : undefined}
+                                            >
+                                                {flexRender(header.column.columnDef.header, header.getContext())}
+                                                {header.column.getCanSort() && showUpAndDownArrows && (
+                                                    <ArrowUpDown
+                                                        className="w-4 h-4 text-muted-foreground dark:text-gray-400"/>
+                                                )}
+                                            </div>
+                                        )}
+                                    </th>
+                                ))}
+                            </tr>
+                        ))}
+                        </thead>
 
-                    <tbody>
-                    {table.getRowModel().rows.map((row) => (
-                        <tr key={row.id}
-                            className="h-14 border-b hover:bg-muted/10 cursor-pointer dark:border-gray-700 dark:hover:bg-gray-700/50">
-                            {row.getVisibleCells().map((cell) => (
-                                <td key={cell.id}
-                                    className="px-4 py-4 whitespace-nowrap text-gray-800 dark:text-gray-200">
-                                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                                </td>
-                            ))}
-                        </tr>
-                    ))}
-                    </tbody>
-                </table>
+                        <tbody>
+                        {table.getRowModel().rows.map((row) => (
+                            <tr key={row.id}
+                                className="h-14 border-b hover:bg-muted/10 cursor-pointer dark:border-gray-700 dark:hover:bg-gray-700/50">
+                                {row.getVisibleCells().map((cell) => (
+                                    <td key={cell.id}
+                                        className="px-4 py-4 whitespace-nowrap text-gray-800 dark:text-gray-200">
+                                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                    </td>
+                                ))}
+                            </tr>
+                        ))}
+                        </tbody>
+                    </table>
+                </div>
             ) : (
                 <div
                     className="py-20 text-center space-y-2 bg-white dark:bg-gray-800">
@@ -188,7 +183,6 @@ export function DataTable<TData extends object, TValue>({
                 </div>
             )}
 
-            {/* Pagination footer */}
             {pagination && (
                 <div
                     className="flex flex-col sm:flex-row sm:items-center sm:justify-between px-4 py-3 gap-4 bg-muted/20 dark:bg-gray-700 dark:border-t dark:border-gray-600">

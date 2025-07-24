@@ -30,19 +30,65 @@ export default function DashboardSettingsPage() {
                 Manage your team and preferences here.
             </p>
 
+            {/*Smaller screens*/}
             <Tabs defaultValue="roles" className="space-y-6">
-                {/* Tabs List - Removed gap-2 for no space between tabs */}
-                <TabsList className="flex justify-start bg-transparent p-0 h-auto rounded-none flex-wrap">
-                    {["My details", "Profile", "Password", "Team", "Plan", "Roles", "Notifications", "Integrations", "API"].map((tab) => (
-                        <TabsTrigger
-                            key={tab}
-                            value={tab.toLowerCase().replace(/\s/g, '-')}
-                            className="px-4 py-2 text-sm font-semibold rounded-lg border border-gray-200 text-[#667085] data-[state=active]:text-[#1A1A1A] data-[state=active]:border-blue-600 data-[state=active]:bg-transparent data-[state=active]:shadow-none dark:text-gray-400 dark:data-[state=active]:text-white dark:data-[state=active]:border-blue-400"
-                        >
-                            {tab}
-                        </TabsTrigger>
-                    ))}
+                <div className="sm:hidden overflow-x-auto no-scrollbar">
+                <TabsList
+                    className="flex w-max justify-start bg-transparent p-0 h-auto rounded-none overflow-x-auto no-scrollbar"
+                >
+                    {[
+                        "My details", "Profile", "Password", "Team", "Plan",
+                        "Roles", "Notifications", "Integrations", "API",
+                    ].map((tab, index, arr) => {
+                        const isFirst = index === 0;
+                        const isLast = index === arr.length - 1;
+
+                        return (
+                            <TabsTrigger
+                                key={tab}
+                                value={tab.toLowerCase().replace(/\s/g, '-')}
+                                className={cn(
+                                    // REMOVE all default rounded styling
+                                    "rounded-none whitespace-nowrap px-4 py-2 text-sm font-semibold border-y border-r border-gray-200 text-[#667085] data-[state=active]:text-[#1A1A1A] data-[state=active]:border-blue-600 data-[state=active]:bg-white dark:text-gray-400 dark:data-[state=active]:text-white dark:data-[state=active]:border-blue-400",
+                                    isFirst && "border-l rounded-l-md",
+                                    isLast && "rounded-r-md"
+                                )}
+                            >
+                                {tab}
+                            </TabsTrigger>
+                        );
+                    })}
                 </TabsList>
+                </div>
+
+                {/* For larger screens, show as normal */}
+                <div className="hidden sm:flex">
+                    <TabsList
+                        className="flex bg-transparent p-0 h-auto rounded-none"
+                    >
+                        {[
+                            "My details", "Profile", "Password", "Team", "Plan",
+                            "Roles", "Notifications", "Integrations", "API",
+                        ].map((tab, index, arr) => {
+                            const isFirst = index === 0;
+                            const isLast = index === arr.length - 1;
+
+                            return (
+                                <TabsTrigger
+                                    key={tab}
+                                    value={tab.toLowerCase().replace(/\s/g, '-')}
+                                    className={cn(
+                                        "rounded-none whitespace-nowrap px-4 py-2 text-sm font-semibold border-y border-r border-gray-200 text-[#667085] data-[state=active]:text-[#1A1A1A] data-[state=active]:border-blue-600 data-[state=active]:bg-white dark:text-gray-400 dark:data-[state=active]:text-white dark:data-[state=active]:border-blue-400",
+                                        isFirst && "border-l rounded-l-md",
+                                        isLast && "rounded-r-md"
+                                    )}
+                                >
+                                    {tab}
+                                </TabsTrigger>
+                            );
+                        })}
+                    </TabsList>
+                </div>
 
                 <TabsContent value="roles" className="space-y-6">
                     {/* User Roles Section */}

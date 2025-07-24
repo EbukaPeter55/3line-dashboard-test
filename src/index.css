@@ -41,6 +41,14 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 :root {
   --side-nav-text: #101828;
   --light-background: #F9FAFB;
