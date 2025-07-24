@@ -9,7 +9,6 @@ const MERGED_DASHBOARD_BIN_URL = `${DOMAINS_API_URL}/latest`;
 export async function fetchFullDashboardData(): Promise<FullDashboardData> {
     try {
         const response = await fetch(MERGED_DASHBOARD_BIN_URL, {
-            // next: { revalidate: 3600 } // Removed: This is a Next.js specific fetch option
         });
 
         if (!response.ok) {

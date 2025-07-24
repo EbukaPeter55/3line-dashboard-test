@@ -1,6 +1,6 @@
 import {render, screen} from '@testing-library/react';
 import '@testing-library/jest-dom';
-import DashboardSettingsPage from "@/features/dashboard/pages/DashboardSettings";
+import DashboardSettingsPage from "@/features/dashboard/pages/DashboardSettings/DashboardSettings";
 
 jest.mock('@/components/ui/tabs', () => ({
     Tabs: ({children, ...props}) => <div data-testid="mock-tabs" {...props}>{children}</div>,

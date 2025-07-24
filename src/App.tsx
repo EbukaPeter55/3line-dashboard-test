@@ -4,7 +4,7 @@ import {BrowserRouter, Route, Routes, Navigate} from "react-router-dom";
 
 const DashboardLayout = lazy(() => import("./features/dashboard/DashboardLayout"));
 const DashboardPage = lazy(() => import("./features/dashboard/components/DashboardPage"));
-const SettingsPage = lazy(() => import("@/features/dashboard/pages/DashboardSettings"));
+const SettingsPage = lazy(() => import("@/features/dashboard/pages/DashboardSettings/DashboardSettings"));
 
 function App() {
 

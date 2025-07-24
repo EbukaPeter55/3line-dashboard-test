@@ -5,7 +5,6 @@ import reportingIcon from "../../../assets/dashboard/reporting.png";
 import userIcon from "../../../assets/dashboard/users.png";
 import supportIcon from "../../../assets/dashboard/support.png";
 import {
-  Country,
   FullDashboardData,
   NavItem,
   Notification,
@@ -18,33 +17,33 @@ export const navItems: NavItem[] = [
     icon: Home,
   },
   {
-    href: "#",
+    href: "",
     label: "Dashboard",
     icon: BarChart,
   },
   {
-    href: "#",
+    href: "",
     label: "Projects",
     count: 10,
     image: {default: projectIcon, active: projectIcon}
   },
   {
-    href: "#",
+    href: "",
     label: "Tasks",
     image: {default: taskIcon, active: taskIcon}
   },
   {
-    href: "#",
+    href: "",
     label: "Reporting",
     image: {default: reportingIcon, active: reportingIcon}
   },
   {
-    href: "#",
+    href: "",
     label: "Users",
     image: {default: userIcon, active: userIcon}
   },
   {
-    href: "#",
+    href: "",
     label: "Support",
     image: {default: supportIcon, active: supportIcon}
   },

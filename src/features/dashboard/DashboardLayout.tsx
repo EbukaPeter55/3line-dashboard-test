@@ -28,13 +28,13 @@ export default function DashboardLayout() {
                 </div>
                 <button
                     onClick={toggleSidebar}
-                    className="absolute top-4 left-64 z-50 bg-white border rounded-full p-1 shadow transition-all hidden lg:block cursor-pointer dark:bg-gray-700 dark:border-gray-600"
+                    className="absolute top-4 left-64 z-50 bg-white border rounded-full p-1 shadow transition-all hidden lg:block cursor-pointer"
                     style={{ left: isSidebarCollapsed ? '3.5rem' : '15.5rem' }}
                 >
                     {isSidebarCollapsed ? <ChevronRight size={16} className="dark:text-gray-100" /> : <ChevronLeft size={16} className="dark:text-gray-100" />}
                 </button>
 
-                <main className="p-4 overflow-y-auto flex-1 bg-slate-50 dark:bg-gray-900">
+                <main className="p-0 overflow-y-auto flex-1 bg-slate-50 dark:bg-gray-900">
                     <Outlet /> {/* This is where nested routes (like DashboardPage, SettingsPage) renders */}
                 </main>
             </div>

@@ -124,14 +124,14 @@ export function DataTable<TData extends object, TValue>({
 
     return (
         <div className="border rounded-xl overflow-hidden bg-white">
-            <div className="flex flex-wrap gap-2 items-center justify-between px-4 py-3 border-b bg-muted/20 dark:bg-gray-700 dark:border-gray-600">
+            <div className="flex flex-wrap gap-2 items-center justify-between px-4 py-3 border-b bg-muted/20">
                 {hasTableTitle ? (
-                    <h4 className="text-[1rem] font-semibold text-[var(--primary-text)] dark:text-gray-100">
+                    <h4 className="text-[1rem] font-semibold text-[var(--primary-text)]">
                         {tableTitle}
                     </h4>
                 ) : null}
                 {enableRowSelection && table.getFilteredSelectedRowModel().rows.length > 0 && (
-                    <div className="text-sm text-muted-foreground dark:text-gray-300">
+                    <div className="text-sm text-muted-foreground">
                         {table.getFilteredSelectedRowModel().rows.length} of{' '}
                         {table.getFilteredRowModel().rows.length} row(s) selected.
                     </div>
@@ -139,14 +139,14 @@ export function DataTable<TData extends object, TValue>({
             </div>
 
             {data.length ? (
-                <div className="w-full overflow-x-auto sm:overflow-visible">
-                    <table className="w-full min-w-[700px] text-sm">
-                        <thead className="bg-muted/40 dark:bg-gray-700">
+                <div className="w-full overflow-x-auto">
+                    <table className="w-full text-sm">
+                        <thead className="bg-muted/40">
                         {table.getHeaderGroups().map((hg) => (
-                            <tr key={hg.id} className="border-b dark:border-gray-600">
+                            <tr key={hg.id} className="border-b">
                                 {hg.headers.map((header) => (
                                     <th key={header.id}
-                                        className="px-4 py-3 text-left font-medium text-muted-foreground dark:text-gray-300 whitespace-nowrap">
+                                        className="px-4 py-3 text-left font-medium text-muted-foreground whitespace-nowrap">
                                         {header.isPlaceholder ? null : (
                                             <div
                                                 className={cn(
@@ -158,7 +158,7 @@ export function DataTable<TData extends object, TValue>({
                                                 {flexRender(header.column.columnDef.header, header.getContext())}
                                                 {header.column.getCanSort() && showUpAndDownArrows && (
                                                     <ArrowUpDown
-                                                        className="w-4 h-4 text-muted-foreground dark:text-gray-400"/>
+                                                        className="w-4 h-4 text-muted-foreground"/>
                                                 )}
                                             </div>
                                         )}
@@ -171,10 +171,10 @@ export function DataTable<TData extends object, TValue>({
                         <tbody>
                         {table.getRowModel().rows.map((row) => (
                             <tr key={row.id}
-                                className="h-14 border-b hover:bg-muted/10 cursor-pointer dark:border-gray-700 dark:hover:bg-gray-700/50">
+                                className="h-14 border-b hover:bg-muted/10 cursor-pointer">
                                 {row.getVisibleCells().map((cell) => (
                                     <td key={cell.id}
-                                        className="px-4 py-4 whitespace-nowrap text-gray-800 dark:text-gray-200">
+                                        className="px-4 py-4 whitespace-nowrap text-gray-800">
                                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                     </td>
                                 ))}
@@ -185,11 +185,11 @@ export function DataTable<TData extends object, TValue>({
                 </div>
             ) : (
                 <div
-                    className="py-20 text-center space-y-2 bg-white dark:bg-gray-800">
+                    className="py-20 text-center space-y-2 bg-white">
                     <img src="/assets/dashboard/empty-icon.png" alt="" width={40} height={40}
                          className="opacity-60 mx-auto"/>
-                    <h3 className="font-semibold text-gray-800 dark:text-gray-100">{emptyTitle || 'No Data'}</h3>
-                    <p className="text-sm text-muted-foreground max-w-sm mx-auto dark:text-gray-400">
+                    <h3 className="font-semibold text-gray-800">{emptyTitle || 'No Data'}</h3>
+                    <p className="text-sm text-muted-foreground max-w-sm mx-auto">
                         {emptyDescription || 'Nothing has been added yet.'}
                     </p>
                 </div>
@@ -197,23 +197,23 @@ export function DataTable<TData extends object, TValue>({
 
             {pagination && (
                 <div
-                    className="flex flex-col sm:flex-row sm:items-center sm:justify-between px-4 py-3 gap-4 bg-muted/20 dark:bg-gray-700 dark:border-t dark:border-gray-600">
+                    className="flex flex-col sm:flex-row sm:items-center sm:justify-between px-4 py-3 gap-4 bg-muted/20">
                     <div
-                        className="flex items-center gap-2 text-sm text-muted-foreground dark:text-gray-300">
+                        className="flex items-center gap-2 text-sm text-muted-foreground">
                         <span>Show:</span>
                         <Select
                             value={table.getState().pagination.pageSize.toString()}
                             onValueChange={(v) => table.setPageSize(Number(v))}
                         >
                             <SelectTrigger
-                                className="w-[90px] h-8 bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-gray-200">
+                                className="w-[90px] h-8 bg-white border-gray-600 text-gray-200">
                                 <SelectValue placeholder="Items"/>
                             </SelectTrigger>
                             <SelectContent
-                                className="bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-gray-200">
+                                className="bg-white border-gray-600 text-gray-200">
                                 {[5, 10, 20, 50].map((n) => (
                                     <SelectItem key={n} value={n.toString()}
-                                                className="hover:bg-muted/10 dark:hover:bg-gray-700/50">
+                                                className="hover:bg-muted/10">
                                         {n}
                                     </SelectItem>
                                 ))}
@@ -227,30 +227,23 @@ export function DataTable<TData extends object, TValue>({
                                 key={i}
                                 variant={table.getState().pagination.pageIndex === i ? 'default' : 'outline'}
                                 size="sm"
-                                className="w-8 h-8 p-0
-                                    dark:text-gray-100
-                                    dark:bg-gray-900
-                                    dark:border-gray-600
-                                    dark:hover:bg-gray-950
-                                    dark:hover:text-gray-50
-                                    dark:focus:ring-offset-gray-950
-                                "
+                                className="w-8 h-8 p-0"
                                 onClick={() => table.setPageIndex(i)}
                             >
                                 {i + 1}
                             </Button>
                         )).slice(0, 5)}
                         {table.getPageCount() > 5 && <span
-                            className="px-1 text-muted-foreground dark:text-gray-300">…</span>}
+                            className="px-1 text-muted-foreground">…</span>}
                         <Button size="sm" variant="outline" onClick={() => table.previousPage()}
                                 disabled={!table.getCanPreviousPage()}
-                                className="dark:text-gray-100 dark:bg-gray-900 dark:border-gray-600 dark:hover:bg-gray-950 dark:hover:text-gray-50 dark:focus:ring-offset-gray-950"
+                                className=""
                         >
                             Prev
                         </Button>
                         <Button size="sm" variant="outline" onClick={() => table.nextPage()}
                                 disabled={!table.getCanNextPage()}
-                                className="dark:text-gray-100 dark:bg-gray-900 dark:border-gray-600 dark:hover:bg-gray-950 dark:hover:text-gray-50 dark:focus:ring-offset-gray-950"
+                                className=""
                         >
                             Next
                         </Button>
