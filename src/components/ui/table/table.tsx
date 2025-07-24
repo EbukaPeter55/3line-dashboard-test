@@ -11,7 +11,7 @@ import {
     SortingState,
     RowSelectionState,
 } from '@tanstack/react-table';
-import {useState, useMemo} from 'react';
+import {useState, useMemo, useEffect, useRef} from 'react';
 import {Button} from '../button';
 import {ArrowUpDown} from 'lucide-react';
 import {
@@ -52,6 +52,7 @@ export function DataTable<TData extends object, TValue>({
                                                         }: DataTableProps<TData, TValue>) {
     const [sorting, setSorting] = useState<SortingState>([]);
     const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
+    const prevSelectedRef = useRef<any[]>([]);
 
     const allColumns = useMemo(() => {
         if (!enableRowSelection) {
@@ -64,8 +65,11 @@ export function DataTable<TData extends object, TValue>({
                 header: ({table}) => (
                     <Checkbox
                         checked={
-                            table.getIsAllPageRowsSelected() ||
-                            (table.getIsSomePageRowsSelected() && 'indeterminate')
+                            table.getIsAllPageRowsSelected()
+                                ? true
+                                : table.getIsSomePageRowsSelected()
+                                    ? 'indeterminate'
+                                    : false
                         }
                         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
                         aria-label="Select all"
@@ -103,10 +107,18 @@ export function DataTable<TData extends object, TValue>({
         enableRowSelection: enableRowSelection,
     });
 
-    useState(() => {
-        if (onRowSelectionChange) {
-            const selectedRowsData = table.getSelectedRowModel().flatRows.map(row => row.original);
-            onRowSelectionChange(selectedRowsData);
+    useEffect(() => {
+        const selectedRowsData = table.getSelectedRowModel().flatRows.map(row => row.original);
+        const isSame =
+            selectedRowsData.length === prevSelectedRef.current.length &&
+            selectedRowsData.every((row, idx) => row === prevSelectedRef.current[idx]);
+
+        if (!isSame) {
+            prevSelectedRef.current = selectedRowsData;
+
+            if (onRowSelectionChange) {
+                onRowSelectionChange(selectedRowsData);
+            }
         }
     }, [rowSelection, table, onRowSelectionChange]);
 

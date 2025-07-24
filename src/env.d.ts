@@ -1,7 +1,6 @@
-// src/env.d.ts (or vite-env.d.ts)
-/// <reference types="vite/client" /> // This line is crucial for Vite's default env types
+/// <reference types="vite/client" />
 
-interface ImportMetaEnv {
+interface ImportMetaEnv extends Readonly<Record<string, string>> {
     readonly VITE_DOMAINS_API_URL: string;
 }
 
