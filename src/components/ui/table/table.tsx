@@ -139,7 +139,7 @@ export function DataTable<TData extends object, TValue>({
             </div>
 
             {data.length ? (
-                <div className="w-full overflow-x-auto">
+                <div className="w-[400px] sm:w-full overflow-x-auto">
                     <table className="w-full text-sm">
                         <thead className="bg-muted/40">
                         {table.getHeaderGroups().map((hg) => (
