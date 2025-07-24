@@ -131,12 +131,12 @@ export default function SidebarContent({isCollapsed}: SidebarContentProps) {
             </div>
 
             {/* Main Navigation */}
-            <nav className="flex-1 overflow-y-auto p-4 space-y-2">
-                {navItems.map((item) => {
+            <nav className="mb-4 overflow-y-auto p-4 space-y-2">
+                {navItems.map((item, idx) => {
                     if ("type" in item && item.type === "divider")
                         return (
                             <hr
-                                key={Math.random()} // Use a more stable key if possible, e.g., index if order never changes
+                                key={idx}
                                 className="my-2 border-gray-300 dark:border-gray-700"
                             />
                         );

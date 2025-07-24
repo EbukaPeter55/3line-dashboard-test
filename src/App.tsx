@@ -3,7 +3,7 @@ import "./App.css";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import DashboardLayout from "./features/dashboard/DashboardLayout";
 import DashboardPage from "./features/dashboard/components/DashboardPage";
-import SettingsPage from "./features/dashboard/components/SettingsPage";
+import SettingsPage from "@/features/dashboard/pages/DashboardSettings";
 
 function App() {
   const [count, setCount] = useState(0);
