@@ -9,7 +9,6 @@ import {DataTable} from "@/components/ui/table/table";
 import {roleColumns} from "@/components/ui/table/column";
 import {useState} from "react";
 import {RoleTableData} from "@/components/ui/table/table-types";
-import "../../../../../App.css";
 
 export default function RoleTabContent() {
     const [selectedRole, setSelectedRole] = useState<string>("superadmin");

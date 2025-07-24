@@ -37,7 +37,7 @@ export default function SidebarContent({isCollapsed}: SidebarContentProps) {
                     )}
                 >
                     {item.icon && (
-                        <item.icon className="h-4 w-4 flex-shrink-0 text-gray-500 dark:text-gray-400"/>
+                        <item.icon className="h-4 w-4 flex-shrink-0 text-gray-500"/>
                     )}
                     {!isCollapsed && <span>{item.label}</span>}
                 </button>
@@ -52,7 +52,7 @@ export default function SidebarContent({isCollapsed}: SidebarContentProps) {
                     "flex items-center gap-2 p-2 rounded text-sm transition-colors duration-200",
                     location.pathname === item.href
                         ? "bg-[#F9FAFB] text-[#1A1A1A] font-semibold" // Active state
-                        : "text-[#667085] hover:bg-gray-100 hover:text-[#1A1A1A] dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                        : "text-[#667085] hover:bg-gray-100 hover:text-[#1A1A1A]"
                 )}
             >
                 {item?.image ? (
@@ -81,7 +81,7 @@ export default function SidebarContent({isCollapsed}: SidebarContentProps) {
                                 "h-4 w-4 flex-shrink-0",
                                 location.pathname === item.href
                                     ? "text-[#1A1A1A]"
-                                    : "text-gray-500 dark:text-gray-400 group-hover:text-[#1A1A1A]"
+                                    : "text-gray-500 group-hover:text-[#1A1A1A]"
                             )}
                         />
                     )
@@ -105,7 +105,7 @@ export default function SidebarContent({isCollapsed}: SidebarContentProps) {
     };
 
     return (
-        <div className="h-full flex flex-col bg-white dark:bg-gray-800">
+        <div className="h-full flex flex-col bg-white">
             {/* Brand Logo */}
             <div className="h-16 flex items-center pl-4 border-b shrink-0 border-gray-200">
                 {!isCollapsed && (
@@ -114,13 +114,13 @@ export default function SidebarContent({isCollapsed}: SidebarContentProps) {
             </div>
 
             {/* Search Bar */}
-            <div className="p-4 border-b border-gray-200 dark:border-gray-700">
+            <div className="p-4 border-b border-gray-200">
                 <div className="relative">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500"/>
                     <input
                         type="text"
                         placeholder={!isCollapsed ? "Search..." : ""}
-                        className={`w-full py-2 pl-9 pr-3 text-sm rounded-md border border-gray-300 dark:border-gray-600 focus:ring-1 focus:ring-blue-500 focus:border-blue-500
+                        className={`w-full py-2 pl-9 pr-3 text-sm rounded-md border border-[#D6BBFB] focus:ring-1 focus:ring-purple-500 focus:border-purple-500
               ${isCollapsed ? "sr-only" : ""}`}
                         aria-label="Search sidebar"
                     />
@@ -137,7 +137,7 @@ export default function SidebarContent({isCollapsed}: SidebarContentProps) {
                         return (
                             <hr
                                 key={idx}
-                                className="my-2 border-gray-300 dark:border-gray-700"
+                                className="my-2 border-gray-300"
                             />
                         );
 
@@ -164,20 +164,20 @@ export default function SidebarContent({isCollapsed}: SidebarContentProps) {
                                 onClick={() => toggle(dropdown.label)}
                                 className={cn(
                                     "w-full flex items-center justify-between p-2 rounded text-sm transition-colors duration-200",
-                                    "text-[#667085] hover:bg-gray-100 hover:text-[#1A1A1A] dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                                    "text-[#667085] hover:bg-gray-100 hover:text-[#1A1A1A]"
                                 )}
                             >
                 <span className="flex items-center gap-2">
                   {dropdown.icon && (
-                      <dropdown.icon className="h-5 w-5 text-gray-500 dark:text-gray-400"/>
+                      <dropdown.icon className="h-5 w-5 text-gray-500"/>
                   )}
                     {!isCollapsed && dropdown.label}
                 </span>
                                 {!isCollapsed &&
                                     (openNow ? (
-                                        <ChevronDown className="h-4 w-4 text-gray-500 dark:text-gray-400"/>
+                                        <ChevronDown className="h-4 w-4 text-gray-500"/>
                                     ) : (
-                                        <ChevronRight className="h-4 w-4 text-gray-500 dark:text-gray-400"/>
+                                        <ChevronRight className="h-4 w-4 text-gray-500"/>
                                     ))}
                             </button>
                             {openNow && (
@@ -227,7 +227,7 @@ export default function SidebarContent({isCollapsed}: SidebarContentProps) {
             </nav>
 
             {/* User Profile / Logout Section */}
-            <div className="p-4 border-t border-gray-200 dark:border-gray-700 flex items-center gap-3 shrink-0">
+            <div className="p-4 border-t border-gray-200 flex items-center gap-3 shrink-0">
                 <img
                     src={userAvatar}
                     alt="Olivia Rhye"
@@ -241,7 +241,7 @@ export default function SidebarContent({isCollapsed}: SidebarContentProps) {
                 )}
                 {!isCollapsed && (
                     <button onClick={handleLogout}
-                            className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 p-1 rounded">
+                            className="text-gray-500 hover:text-gray-700 dark:text-gray-400 p-1 rounded">
                         <LogOut className="h-5 w-5"/>
                     </button>
                 )}
