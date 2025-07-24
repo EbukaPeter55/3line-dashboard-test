@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import menuIcon from "../../../assets/dashboard/menu-2.png"
 import brandLogo from "../../../assets/brand-logo.png";
 
@@ -15,8 +14,8 @@ export default function Header({ onMenuClick }: HeaderProps) {
     >
       <div className="flex items-center justify-between w-full">
         <img src={brandLogo} alt="brandLogo" />
-        <button className="lg:hidden" onClick={onMenuClick}>
-          <img src={menuIcon} className="h-6 w-6 text-slate-800" />
+        <button aria-label="Toggle menu" className="lg:hidden" onClick={onMenuClick}>
+          <img alt="Menu Icon" src={menuIcon} className="h-6 w-6 text-slate-800" />
         </button>
       </div>
     </header>

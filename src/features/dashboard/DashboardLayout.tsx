@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import SideBar from './components/SideBar';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import MobileDrawer from './components/ MobileDrawer';
 import Header from './components/Header';
+import MobileDrawer from "@/features/dashboard/components/MobileDrawer";
 
 
 export default function DashboardLayout() {

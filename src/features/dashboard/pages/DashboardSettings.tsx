@@ -9,6 +9,7 @@ import {useState} from "react";
 import {sampleRoleTableData, USER_ROLES} from "@/features/dashboard/pages/shared/constants/role-constant";
 import {roleColumns} from "@/components/ui/table/column";
 import {DataTable} from "@/components/ui/table/table";
+import {RoleTableData} from "@/components/ui/table/table-types";
 
 export default function DashboardSettingsPage() {
     const [selectedRole, setSelectedRole] = useState<string>("superadmin");
@@ -35,6 +36,7 @@ export default function DashboardSettingsPage() {
                 <div className="sm:hidden overflow-x-auto no-scrollbar">
                 <TabsList
                     className="flex w-max justify-start bg-transparent p-0 h-auto rounded-none overflow-x-auto no-scrollbar"
+                    data-testid="mock-tabs-list-small-screen"
                 >
                     {[
                         "My details", "Profile", "Password", "Team", "Plan",
@@ -48,11 +50,11 @@ export default function DashboardSettingsPage() {
                                 key={tab}
                                 value={tab.toLowerCase().replace(/\s/g, '-')}
                                 className={cn(
-                                    // REMOVE all default rounded styling
                                     "rounded-none whitespace-nowrap px-4 py-2 text-sm font-semibold border-y border-r border-gray-200 text-[#667085] data-[state=active]:text-[#1A1A1A] data-[state=active]:border-blue-600 data-[state=active]:bg-white dark:text-gray-400 dark:data-[state=active]:text-white dark:data-[state=active]:border-blue-400",
                                     isFirst && "border-l rounded-l-md",
                                     isLast && "rounded-r-md"
                                 )}
+                                data-testid={`mock-tab-trigger-${tab.toLowerCase().replace(/\s/g, '-')}-small-screen`}
                             >
                                 {tab}
                             </TabsTrigger>
@@ -65,6 +67,7 @@ export default function DashboardSettingsPage() {
                 <div className="hidden sm:flex">
                     <TabsList
                         className="flex bg-transparent p-0 h-auto rounded-none"
+                        data-testid="mock-tabs-list"
                     >
                         {[
                             "My details", "Profile", "Password", "Team", "Plan",
@@ -82,6 +85,7 @@ export default function DashboardSettingsPage() {
                                         isFirst && "border-l rounded-l-md",
                                         isLast && "rounded-r-md"
                                     )}
+                                    data-testid={`mock-tab-trigger-${tab.toLowerCase().replace(/\s/g, '-')}`}
                                 >
                                     {tab}
                                 </TabsTrigger>
@@ -90,7 +94,7 @@ export default function DashboardSettingsPage() {
                     </TabsList>
                 </div>
 
-                <TabsContent value="roles" className="space-y-6">
+                <TabsContent value="roles" className="space-y-6" data-testid="mock-tab-content-roles">
                     {/* User Roles Section */}
                     <div className="space-y-2 text-left">
                         <h3 className="text-xl font-medium text-[#1A1A1A]">User Roles</h3>
@@ -103,36 +107,45 @@ export default function DashboardSettingsPage() {
                     <div className="flex flex-col md:flex-row md:space-x-8">
                         <div className="space-y-2 text-left w-full md:w-1/4">
                             <Label htmlFor="connected-email"
-                                   className="block text-sm font-medium text-[#344054] dark:text-gray-300">Connected
+                                   className="block text-sm font-medium text-[#344054]"
+                                   data-testid="mock-label">Connected
                                 email</Label>
                             <p className="text-xs text-[#667085] dark:text-gray-400">Select role account</p>
                         </div>
 
                         <div className="space-y-2 w-full">
                             {/* RadioGroup wraps RadioGroupItems for connected email options */}
-                            <RadioGroup defaultValue="olivia@untitledui.com" className="space-y-3 mt-2 w-full">
+                            <RadioGroup defaultValue="olivia@untitledui.com" className="space-y-3 mt-2 w-full" data-testid="email-radio-group">
                                 <div>
                                     <div className="flex items-start space-x-2">
                                         <RadioGroupItem value="olivia@untitledui.com" id="primary-email-radio"
-                                                        className="data-[state=checked]:border-[var(--checked-box-colour)] data-[state=checked]:bg-white data-[state=checked]:text-[var(--checked-box-colour)]"/>
+                                                        className="data-[state=checked]:border-[var(--checked-box-colour)] data-[state=checked]:bg-white data-[state=checked]:text-[var(--checked-box-colour)]"
+                                                        data-testid="mock-radio-group-item"/>
                                         <Label htmlFor="my-account-email"
-                                               className="block text-sm font-medium text-[#344054] dark:text-gray-300">My
-                                            account email</Label>
+                                               className="block text-sm font-medium text-[#344054] dark:text-gray-300"
+                                               data-testid="mock-label">
+                                            My account email</Label>
                                     </div>
                                     <Label htmlFor="primary-email-radio"
-                                           className="text-sm font-normal text-[#667085] px-6">olivia@untitledui.com</Label>
+                                           className="text-sm font-normal text-[#667085] px-6"
+                                           data-testid="mock-label"
+                                    >olivia@untitledui.com</Label>
                                 </div>
                                 <div className="flex items-start space-x-2 rounded-lg w-3/4">
                                     <RadioGroupItem value="billing@untitledui.com" id="alternative-email-radio"
-                                                    className="mt-1 data-[state=checked]:border-[var(--checked-box-colour)] data-[state=checked]:bg-white data-[state=checked]:text-[var(--checked-box-colour)]"/>
+                                                    className="mt-1 data-[state=checked]:border-[var(--checked-box-colour)] data-[state=checked]:bg-white data-[state=checked]:text-[var(--checked-box-colour)]"
+                                                    data-testid="mock-radio-group-item"
+                                    />
                                     <div className="flex-1">
                                         <Label htmlFor="alternative-email-radio"
-                                               className="text-sm text-gray-900 dark:text-gray-100">An alternative
+                                               className="text-sm text-gray-900 dark:text-gray-100"
+                                               data-testid="mock-label">An alternative
                                             email</Label>
                                         <Input
                                             type="email"
                                             placeholder="billing@untitledui.com"
                                             className="mt-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            data-testid="mock-input"
                                         />
                                     </div>
                                 </div>
@@ -153,6 +166,7 @@ export default function DashboardSettingsPage() {
                                 value={selectedRole}
                                 onValueChange={setSelectedRole}
                                 className="grid grid-cols-1 md:grid-cols-1 gap-4 md:flex-grow"
+                                data-testid="role-radio-group"
                             >
                                 {USER_ROLES.map((role) => (
                                     <div
@@ -164,7 +178,7 @@ export default function DashboardSettingsPage() {
                                                 : "border-gray-200 bg-white"
                                         )}
                                     >
-                                        <div className="">
+                                        <div>
                                             <Label
                                                 htmlFor={role.id}
                                                 className={cn(
@@ -173,6 +187,7 @@ export default function DashboardSettingsPage() {
                                                         ? "text-[#7F56D9]"
                                                         : "text-[#344054]"
                                                 )}
+                                                data-testid="role-radio-group"
                                             >
                                                 <img src={role.icon} alt={`${role.name} icon`} className="h-9 w-12"/>
                                                 <div className="mt-[-.75rem]">{role.name}</div>
@@ -221,13 +236,15 @@ export default function DashboardSettingsPage() {
                                                 value={role.id}
                                                 id={role.id}
                                                 className="cursor-pointer data-[state=checked]:border-[var(--checked-box-colour)] data-[state=checked]:bg-white data-[state=checked]:text-[var(--checked-box-colour)]"
+                                                data-testid="mock-radio-group-item"
                                             />
                                         </div>
                                     </div>
                                 ))}
                                 <div className="flex w-full pt-2">
                                     <Button variant="ghost"
-                                            className="cursor-pointer text-[#667085] hover:bg-blue-50 dark:hover:bg-[var(--checked-box-colour)]">
+                                            className="cursor-pointer text-[#667085] hover:bg-blue-50 dark:hover:bg-[var(--checked-box-colour)]"
+                                            data-testid="add-role-button">
                                         <Plus className="mr-2 h-4 w-4"/> Add role to user
                                     </Button>
                                 </div>
@@ -239,7 +256,8 @@ export default function DashboardSettingsPage() {
                         <div className="flex items-center justify-between">
                             <h3 className="text-xl font-semibold text-[#1A1A1A] dark:text-gray-100">User Roles</h3>
                             <Button variant="outline"
-                                    className="text-[#344054] dark:text-gray-200 border-gray-300 dark:border-gray-600 hover:bg-gray-50">
+                                    className="text-[#344054] dark:text-gray-200 border-gray-300 dark:border-gray-600 hover:bg-gray-50"
+                                    data-testid="download-all-button">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
                                      fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
                                      strokeLinejoin="round" className="lucide lucide-download mr-2">
@@ -261,13 +279,15 @@ export default function DashboardSettingsPage() {
                                 emptyDescription="Adjust filters or add new roles."
                                 enableRowSelection={true}
                                 onRowSelectionChange={handleTableRowSelectionChange}
+                                data-testid="mock-data-table"
                             />
                         </div>
                     </div>
                 </TabsContent>
 
                 {["my-details", "profile", "password", "team", "plan", "notifications", "integrations", "api"].map((tab) => (
-                    <TabsContent key={tab} value={tab} className="text-gray-600 dark:text-gray-400">
+                    <TabsContent key={tab} value={tab} className="text-gray-600"
+                                 data-testid={`mock-tab-content-${tab}`}>
                         Content for {tab.replace(/-/g, ' ').replace(/\b\w/g, char => char.toUpperCase())} tab.
                     </TabsContent>
                 ))}
